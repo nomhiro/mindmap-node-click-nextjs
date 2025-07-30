@@ -34,15 +34,7 @@ export class MermaidParser {
         y: 0,
         level: indent,
         children: [],
-        details: {
-          title: label,
-          description: `${label}の詳細情報`,
-          content: [
-            `• ${label}に関する説明`,
-            `• レベル: ${indent}`,
-            `• 作成日: ${new Date().toLocaleDateString()}`
-          ]
-        }
+        details: this.generateTechDetails(label, indent)
       };
 
       if (indent === 0) {
@@ -95,6 +87,155 @@ export class MermaidParser {
     if (parenthesesMatch) return parenthesesMatch[1];
 
     return content;
+  }
+
+  private static generateTechDetails(label: string, level: number) {
+    const techDetailsMap: Record<string, { description: string; content: string[] }> = {
+      'IT Technology': {
+        description: 'Information Technology（情報技術）は、コンピューターとインターネットを使用して情報を保存、取得、送信、操作するためのテクノロジーです。',
+        content: [
+          'ハードウェア、ソフトウェア、ネットワーク技術を包含',
+          'デジタル変革（DX）の基盤となる技術領域',
+          '急速に進化する技術分野で継続的な学習が必要'
+        ]
+      },
+      'Programming Languages': {
+        description: 'プログラミング言語は、コンピューターに指示を与えるための形式言語です。用途に応じて適切な言語を選択することが重要です。',
+        content: [
+          '用途に応じて適切な言語を選択することが重要',
+          'フロントエンドとバックエンドで異なる言語が使用される',
+          'トレンドや技術要件に応じて新しい言語が登場'
+        ]
+      },
+      'Frontend': {
+        description: 'フロントエンド技術は、ユーザーが直接操作するWebアプリケーションの表示部分を構築するための技術です。',
+        content: [
+          'ユーザーインターフェース（UI）の構築に使用',
+          'レスポンシブデザインとユーザビリティが重要',
+          'モダンなフレームワークで開発効率が向上'
+        ]
+      },
+      'JavaScript': {
+        description: 'JavaScriptは動的なWebページの作成に使用される汎用プログラミング言語です。フロントエンドとバックエンドの両方で使用されます。',
+        content: [
+          'ブラウザで実行される唯一のプログラミング言語',
+          'Node.jsによりサーバーサイドでも実行可能',
+          'ES6以降で多くの新機能が追加され続けている'
+        ]
+      },
+      'React': {
+        description: 'Reactは、Facebookが開発したユーザーインターフェース構築のためのJavaScriptライブラリです。',
+        content: [
+          'コンポーネントベースの開発でコードの再利用性が高い',
+          'Virtual DOMにより高いパフォーマンスを実現',
+          '豊富なエコシステムと活発なコミュニティ'
+        ]
+      },
+      'Vue.js': {
+        description: 'Vue.jsは、プログレッシブフレームワークとして設計された、ユーザーインターフェース構築用のJavaScriptフレームワークです。',
+        content: [
+          '学習コストが低く、初心者にも優しい設計',
+          'プログレッシブフレームワークで段階的な導入が可能',
+          '軽量で高速なパフォーマンス'
+        ]
+      },
+      'Angular': {
+        description: 'Angularは、Googleが開発したTypeScriptベースのWebアプリケーションフレームワークです。',
+        content: [
+          'TypeScriptを標準採用で大規模開発に適している',
+          '包括的なフレームワークで多くの機能を内包',
+          'エンタープライズレベルのアプリケーション開発に最適'
+        ]
+      },
+      'TypeScript': {
+        description: 'TypeScriptは、Microsoftが開発したJavaScriptのスーパーセットで、静的型付けを提供します。',
+        content: [
+          'JavaScriptに静的型付けを追加',
+          'コンパイル時にエラーを検出してバグを削減',
+          '大規模プロジェクトでのコード品質向上に貢献'
+        ]
+      },
+      'CSS': {
+        description: 'CSS（Cascading Style Sheets）は、HTMLドキュメントのスタイルとレイアウトを定義するためのスタイルシート言語です。',
+        content: [
+          'Webページの見た目とレイアウトを制御',
+          'レスポンシブデザインの実現に不可欠',
+          'CSS3で多くの新機能とアニメーションが追加'
+        ]
+      },
+      'Backend': {
+        description: 'バックエンド技術は、サーバーサイドでアプリケーションのロジック、データベース処理、API提供を行う技術です。',
+        content: [
+          'ビジネスロジックとデータ処理を担当',
+          'データベースとの連携とAPI提供',
+          'セキュリティとパフォーマンスが重要な要素'
+        ]
+      },
+      'Python': {
+        description: 'Pythonは、読みやすい構文を持つ高水準プログラミング言語で、Web開発、データサイエンス、AI開発で広く使用されます。',
+        content: [
+          'シンプルで読みやすい構文',
+          '豊富なライブラリとフレームワーク',
+          'データサイエンスとAI分野で特に人気'
+        ]
+      },
+      'Node.js': {
+        description: 'Node.jsは、Chrome V8 JavaScriptエンジンで構築されたJavaScriptランタイム環境で、サーバーサイド開発を可能にします。',
+        content: [
+          'JavaScriptでサーバーサイド開発が可能',
+          'ノンブロッキングI/Oで高いパフォーマンス',
+          'NPMエコシステムで豊富なパッケージを利用'
+        ]
+      },
+      'Databases': {
+        description: 'データベースは、構造化された情報を効率的に保存、取得、管理するためのシステムです。',
+        content: [
+          'データの永続化と効率的な検索機能を提供',
+          'リレーショナル、NoSQL、グラフなど用途に応じて選択',
+          'ACID特性やCAP定理などの理論的基盤が重要'
+        ]
+      },
+      'Cloud Services': {
+        description: 'クラウドサービスは、インターネット経由でコンピューティングリソースを提供するサービスです。',
+        content: [
+          'スケーラビリティと柔軟性を提供',
+          '初期投資を抑えてITインフラを利用可能',
+          'IaaS、PaaS、SaaSの3つの主要なサービスモデル'
+        ]
+      },
+      'DevOps': {
+        description: 'DevOpsは、開発（Development）と運用（Operations）を統合し、ソフトウェアの開発・リリース・運用を効率化する手法です。',
+        content: [
+          '開発と運用の連携でリリースサイクルを短縮',
+          '自動化によりヒューマンエラーを削減',
+          '継続的インテグレーション・継続的デリバリー（CI/CD）を実現'
+        ]
+      },
+      'Security': {
+        description: 'ITセキュリティは、情報システムとデータを様々な脅威から保護するための技術と手法の総称です。',
+        content: [
+          '機密性、完全性、可用性（CIA）の確保が基本',
+          '多層防御アプローチで包括的な保護を実現',
+          '継続的な脅威監視と対策アップデートが必要'
+        ]
+      }
+    };
+
+    // Get specific details or fall back to generic tech info
+    const details = techDetailsMap[label] || {
+      description: `${label}に関する技術情報です。現代のIT業界で重要な役割を果たしている技術領域の一つです。`,
+      content: [
+        `${label}は現代のIT技術において重要な要素`,
+        `継続的な学習と実践が必要な分野`,
+        `他の技術との連携により価値を最大化`
+      ]
+    };
+
+    return {
+      title: label,
+      description: details.description,
+      content: details.content
+    };
   }
 
   private static calculatePositions(nodes: MindmapNode[], rootId: string): void {
